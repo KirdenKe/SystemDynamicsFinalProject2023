@@ -7,7 +7,8 @@ Posmag = 2.5
 Negmag = -2.5
 amplitude = Posmag - Negmag
 ncycle = 5
-period = 10
+frequence = 0.02874
+period = 1 / frequence
 totaltime = ncycle * period
 
 dt = 0.001
@@ -105,9 +106,9 @@ for i in range(0, t.size):
     time += dt
 
 m1 = 1
-m2 = 1
+m2 = 10
 b1 = 1
-b2 = 1
+b2 = 10
 k1 = 1
 k2 = 1
 
