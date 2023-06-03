@@ -1,13 +1,12 @@
 import numpy as np
 import matplotlib.pylab as plt
 from scipy.integrate import odeint
-from vpython import *
 
 Posmag = 2.5
 Negmag = -2.5
 amplitude = Posmag - Negmag
-ncycle = 5
-frequence = 0.04813
+ncycle = 1
+frequence = 0.100234
 period = 1 / frequence
 totaltime = ncycle * period
 
@@ -43,10 +42,10 @@ for i in range(0, t.size):
         square[i] = Negmag
     time += dt
 
-m1 = 1
-m2 = 10
-b1 = 1
-b2 = 10
+m1 = 0.1
+m2 = 0.001
+b1 = 0.1
+b2 = 0.001
 k1 = 1
 k2 = 1
 

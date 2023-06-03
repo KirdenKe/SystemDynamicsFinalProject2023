@@ -6,7 +6,7 @@ Posmag = 2.5
 Negmag = -2.5
 amplitude = Posmag - Negmag
 ncycle = 5
-frequence = 0.48015
+frequence = 0.09603
 period = 1 / frequence
 totaltime = ncycle * period
 

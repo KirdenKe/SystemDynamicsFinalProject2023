@@ -1,19 +1,18 @@
 import numpy as np
 import matplotlib.pylab as plt
 from scipy import signal
-import math
 
 def DampingRatio(x, tar): # 參考至https://electronics.stackexchange.com/questions/565679/finding-resonant-frequency-or-damping-ratio-from-bode-plot
     return np.abs((np.sqrt(1 - 2 * np.power(x, 2) + np.sqrt(2 - 4 * np.power(x, 2) + 4 * np.power(x, 4)))) - tar)
 
 m1 = 1
 m2 = 1
-b1 = 1
+b1 = 9.45
 b2 = 1
 k1 = 1
 k2 = 1
 
-num = [b2, k2]
+num = [k2]
 den = [m1 * m2, m2 * (b1 + b2) + m1 * b2, m2 * (k1 + k2) + b1 * b2 + m1 * k2, b1 * k2 + b2 * k1, k1 * k2]
 system = signal.lti(num, den)
 t, y = signal.step(system)
@@ -27,11 +26,9 @@ w, mag, phase = signal.bode(system, w)
 fn = 0; MagN = 0
 for i in range(len(phase) - 1):
     if (phase[i] + 45) * (phase[i + 1] + 45) < 0:
-        print("Tau: {0:.5f}".format(
-            1 / ((phase[i + 1] + 45) / (phase[i + 1] - phase[i]) * (f[i + 1] - f[i]) + f[i])))  # 自然頻率
+        print("Tau: {0:.5f}".format(1 / ((phase[i + 1] + 45) / (phase[i + 1] - phase[i]) * (f[i + 1] - f[i]) + f[i])))  # 自然頻率
     elif (phase[i] + 90) * (phase[i + 1] + 90) < 0:
-        print("Natural: {0:.5f}".format(
-            (phase[i + 1] + 90) / (phase[i + 1] - phase[i]) * (f[i + 1] - f[i]) + f[i]))  # 自然頻率
+        print("Natural: {0:.5f}".format((phase[i + 1] + 90) / (phase[i + 1] - phase[i]) * (f[i + 1] - f[i]) + f[i])) # 自然頻率
     elif (phase[i] + 180) * (phase[i + 1] + 180) < 0:
         MagN = (phase[i + 1] + 180) / (phase[i + 1] - phase[i]) * (mag[i + 1] - mag[i]) + mag[i]
         fn = (phase[i + 1] + 180) / (phase[i + 1] - phase[i]) * (f[i + 1] - f[i]) + f[i]
